@@ -2,6 +2,8 @@
   Lixie.cpp - Library for driving Lixie displays!
   Created by Connor Nishijima, October 26th 2016.
   Released under the GPLv3 license.
+  
+  Modified by DarkEcco to include support for Adafruit Feather M0 boards, specifically the Feather M0 WiFi with atwinc1500, October 26th 2018.
 */
 
 #include "Lixie.h"
@@ -780,6 +782,31 @@ void Lixie::build_controller(const uint8_t pin){
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
 		else if (pin == 5)
 			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
+	#elif ARDUINO_SAMD_ZERO
+		if (pin == 0)
+			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 1)
+			controller = &FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 2)
+			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 5)
+			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 6)
+			controller = &FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 9)																// Is also analog in, so has voltage divider, sits at 2VDC
+			controller = &FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 10)
+			controller = &FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 11)
+			controller = &FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 12)
+			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 13)																// Is also red LED
+			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 20)
+			controller = &FastLED.addLeds<LED_TYPE, 20, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 21)
+			controller = &FastLED.addLeds<LED_TYPE, 21, COLOR_ORDER>(leds, NumLEDs);
 	#endif
 }
 
